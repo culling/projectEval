@@ -1,0 +1,115 @@
+<html >
+    <head>
+        <title>Test</title>
+
+
+<script type="text/javascript" src="/lib/jquery/dist/jquery.js"></script>
+<meta charset="utf-8">  <!-- it's important for d3.js -->
+<script src="/lib/angular/angular.js"></script>
+<script src="/lib/angular-resource/angular-resource.js"></script>
+<script src="/lib/d3/d3.js"></script>
+<script src="/lib/nvd3/build/nv.d3.js"></script> 
+<script src="/lib/angular-nvd3/dist/angular-nvd3.js"></script>
+<link rel="stylesheet" href="/lib/nvd3/build/nv.d3.css" >
+
+<!-- Styles and looks -->
+
+<link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.css" />
+
+<script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+<link rel="stylesheet" type="text/css" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
+
+    </head>
+
+
+
+    <body ng-app="projectApp" >
+    <div class="col-md-6">
+            <h1>Testing</h1>
+
+
+
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                    <!-- input type="text" ng-model="searchText" placeholder="Search" -->
+                    <input type="text" ng-model="searchText" placeholder="Search" id="search">
+                </div>
+            </div>
+        </form>
+    </div>
+
+<div ng-controller="ProjectsController">
+
+    <div ng-init="find()">
+
+        <div ng-controller="GraphController as graphCtrl">
+        <!-- nvd3 options='options' data='data | filter:searchText'></nvd3 -->
+        <!-- nvd3 options='options' data='chartData | filter:searchText'></nvd3 -->
+        <svg id="d3Chart" style="height: 50%; width: 80%"></svg>
+        </div>
+
+        <div data-ng-repeat="project in projects | filter:searchText">
+
+        <div id="project" class="col-md-12 col-md-offset-1">
+            <div id="projectName" class="row"><b>{{project.projectName}}</b></div>
+            
+			<div  ng-controller='PanelController as panelCtrl'>
+			
+				<section class="row"> 
+                    <ul class="nav nav-pills">
+                        
+					<li ng-class="{active: panel.selectTab(1)}" class="nav nav-pills">
+						<a href ng-click="panelCtrl.selectTab(1)"><span class="fa fa-list-ul"></span></a>
+					</li>
+                    <li ng-class="{active: panel.selectTab(2)}">
+                        <a href ng-click="panelCtrl.selectTab(2)"><span class="fa fa-list-alt"></span></a>
+                    </li>
+                    <li ng-class="{active:panel.selectTab(3)}">
+						<a href ng-click="panelCtrl.selectTab(3)"><span class="fa fa-minus"></span></a>
+					</li>
+				</section>
+                			
+				<div class="panel" ng-show="panelCtrl.tab === 1">
+                    <h4> Project Aim </h4>
+                    <p > {{project.projectAims}}</p>
+
+                    <h4> Project Benefits </h4>
+                    <p > {{project.maximumBenefit}}</p>
+                    <h4> Project Cost </h4>
+                    <p > {{project.maximumCost}}</p>
+				</div>
+                <div class="panel" ng-show="panelCtrl.tab ===2">
+                    <h4> Project Category </h4>
+                    <p > {{project.projectCategory}}</p>
+
+					<h4> Project Sponsor </h4>
+					<p >{{project.projectSponsor}}</p>
+
+                    <h4> Project Description </h4>
+                    <p > {{project.projectDescription}}</p>
+                    
+                </div>
+	
+			</div>
+        </div>
+            <!-- {{project}} -->
+
+        </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="/application.js"></script>
+<script src="/projects/projects.client.module.js"></script>
+<script src="/projects/services/projects.client.service.js"></script >
+<script src="/projects/controllers/projects.client.controller.js"></script >
+<script src="/projects/controllers/panel.client.controller.js"></script >
+<script src="/projects/controllers/graph.client.controller.js"></script >
+
+    </body>
+</html>
