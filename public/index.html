@@ -1,6 +1,6 @@
 <html >
     <head>
-        <title>Test</title>
+        <title>Project Evaluation</title>
 
 
 <script type="text/javascript" src="/lib/jquery/dist/jquery.js"></script>
@@ -8,7 +8,7 @@
 <script src="/lib/angular/angular.js"></script>
 <script src="/lib/angular-resource/angular-resource.js"></script>
 <script src="/lib/d3/d3.js"></script>
-<script src="/lib/nvd3/build/nv.d3.js"></script> 
+<script src="/lib/nvd3/build/nv.d3.js"></script > 
 <script src="/lib/angular-nvd3/dist/angular-nvd3.js"></script>
 <link rel="stylesheet" href="/lib/nvd3/build/nv.d3.css" >
 
@@ -23,11 +23,32 @@
     </head>
 
 
-
     <body ng-app="projectApp" >
-    <div class="col-md-6">
-            <h1>Testing</h1>
+        <br />
+    <div class="col-md-12">
 
+
+    <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Project Evaluation</a>
+            </div>
+        <div class="container-fluid">
+        <!-- div class="navbar-header" -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/create">Create Project</a></li>
+
+                </ul>
+            </div>       
+        </div>
+    </nav>
 
 
         <form>
@@ -45,7 +66,7 @@
 
     <div ng-init="find()">
 
-        <div ng-controller="GraphController as graphCtrl">
+        <div ng-controller="GraphController as graphCtrl" class="col-md-10">
         <!-- nvd3 options='options' data='data | filter:searchText'></nvd3 -->
         <!-- nvd3 options='options' data='chartData | filter:searchText'></nvd3 -->
         <svg id="d3Chart" style="height: 50%; width: 80%"></svg>
@@ -53,7 +74,7 @@
 
         <div data-ng-repeat="project in projects | filter:searchText">
 
-        <div id="project" class="col-md-12 col-md-offset-1">
+        <div id="project" class="col-md-2 col-md-offset-1">
             <div id="projectName" class="row"><b>{{project.projectName}}</b></div>
             
 			<div  ng-controller='PanelController as panelCtrl'>
@@ -67,8 +88,11 @@
                     <li ng-class="{active: panel.selectTab(2)}">
                         <a href ng-click="panelCtrl.selectTab(2)"><span class="fa fa-list-alt"></span></a>
                     </li>
-                    <li ng-class="{active:panel.selectTab(3)}">
-						<a href ng-click="panelCtrl.selectTab(3)"><span class="fa fa-minus"></span></a>
+                    <li ng-class="{active: panel.selectTab(3)}">
+                        <a href ng-click="panelCtrl.selectTab(3)"><span class="fa fa-gear"></span></a>
+                    </li>
+                    <li ng-class="{active:panel.selectTab(4)}">
+						<a href ng-click="panelCtrl.selectTab(4)"><span class="fa fa-minus"></span></a>
 					</li>
 				</section>
                 			
@@ -81,7 +105,7 @@
                     <h4> Project Cost </h4>
                     <p > {{project.maximumCost}}</p>
 				</div>
-                <div class="panel" ng-show="panelCtrl.tab ===2">
+                <div class="panel" ng-show="panelCtrl.tab === 2">
                     <h4> Project Category </h4>
                     <p > {{project.projectCategory}}</p>
 
@@ -91,6 +115,10 @@
                     <h4> Project Description </h4>
                     <p > {{project.projectDescription}}</p>
                     
+                </div>
+                <div class="panel" ng-show="panelCtrl.tab === 3">
+                    <h4> Settings </h4>
+                    <a ng-href="/api/projects/{{project.id}}/delete">Delete Project</a>
                 </div>
 	
 			</div>

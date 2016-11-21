@@ -5,13 +5,16 @@ var getErrorMessage = function(err){
     var message = '';
     if (err.code){
         switch (err.code){
+            case 11000:
+            case 11001:
+                message = 'Project already exists';
+                break;
             default:    
                 message = 'something went wrong';
         }
     } else {
         for(var errName in err.errors){
            if (err.errors[errName].message) message = err.errors[errName].message;
-
         }
     }
     return message;
@@ -37,7 +40,6 @@ exports.create      = function (req, res, next){
             } else {
                 res.json(project);
             }
-
         });
     }else{
         //return res.redirect('/');
@@ -55,6 +57,33 @@ exports.list    =   function(req, res, next){
             return next(err);
         } else {
             res.json(projects);
+        }
+    });
+};
+
+
+exports.read = function (req, res){
+    res.json(req.user);
+};
+
+
+exports.projectById = function (req, res, next, id){
+    console.log('project Id: '+ id);
+    Project.findById(id).select().exec(function(err, project){
+        if(err) return next (err);
+        if(!project) return next(new Error('Failed to load Project ' + id));
+        req.project = project;
+        next();
+    });
+};
+
+exports.delete = function (req, res, next){
+    req.project.remove(function(err){
+        if(err){
+            return next(err);
+        } else{
+            //res.json(req.project);
+            res.redirect('/');
         }
     });
 };

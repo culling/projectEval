@@ -37,7 +37,6 @@ var ProjectSchema   =   new Schema({
         type:       String,
         trim:       true
     }
-
 });
 
 
@@ -45,7 +44,6 @@ ProjectSchema.set('toJSON',{
     getters:    true,
     setters:    true
 });
-
 
 
 mongoose.model('Project', ProjectSchema);
