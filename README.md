@@ -10,13 +10,15 @@ The page is dynamic and responsive using MEAN, Bootstrap and D3 for graphing
 
 ### This project requires
 MongoDB installed and running
+
 Node installed
 
 ### To install/setup 
 Download the zip file
+
 Extract the zip file contents 
-in a command prompt browse to the root of the folder 
-run 
+
+In a command prompt browse to the root of the folder run 
 
 npm install
 
