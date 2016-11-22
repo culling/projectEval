@@ -7,7 +7,6 @@ var ProjectSchema   =   new Schema({
     projectName:    {
         type:       String,
         required:   "Project name is required"
-        //default:    "undefined"
     },
     projectCategory:{
         type:       String,

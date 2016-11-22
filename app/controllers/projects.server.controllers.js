@@ -27,22 +27,18 @@ exports.create      = function (req, res, next){
     if(!req.project){
         console.log('req.body: '   + (req.body));
         var project    = new Project (req.body);
-        
         console.log('project:' + project);
         var message = null;
-
         console.log('before save');
         project.save(function(err){
             if(err){
                 var message = getErrorMessage(err);
                 console.log('error message: ' + message);
-                //return res.redirect('/signup');
             } else {
                 res.json(project);
             }
         });
     }else{
-        //return res.redirect('/');
         console.log('else');
     }
 };
@@ -51,7 +47,6 @@ exports.create      = function (req, res, next){
 
 exports.list    =   function(req, res, next){
     Project.find({},
-    
     function(err, projects){
         if (err){
             return next(err);
@@ -82,7 +77,7 @@ exports.delete = function (req, res, next){
         if(err){
             return next(err);
         } else{
-            //res.json(req.project);
+
             res.redirect('/');
         }
     });

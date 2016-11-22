@@ -39,7 +39,7 @@
                 <a class="navbar-brand" href="#">Project Evaluation</a>
             </div>
         <div class="container-fluid">
-        <!-- div class="navbar-header" -->
+
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
@@ -55,7 +55,7 @@
             <div class="form-group">
                 <div class="input-group">
                     <div class="input-group-addon"><i class="fa fa-search"></i></div>
-                    <!-- input type="text" ng-model="searchText" placeholder="Search" -->
+
                     <input type="text" ng-model="searchText" placeholder="Search" id="search">
                 </div>
             </div>
@@ -66,11 +66,7 @@
 
     <div ng-init="find()">
 
-        <div ng-controller="GraphController as graphCtrl" class="col-md-10">
-        <!-- nvd3 options='options' data='data | filter:searchText'></nvd3 -->
-        <!-- nvd3 options='options' data='chartData | filter:searchText'></nvd3 -->
         <svg id="d3Chart" style="height: 50%; width: 80%"></svg>
-        </div>
 
         <div data-ng-repeat="project in projects | filter:searchText">
 
@@ -123,8 +119,6 @@
 	
 			</div>
         </div>
-            <!-- {{project}} -->
-
         </div>
         </div>
 
