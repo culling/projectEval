@@ -18,7 +18,7 @@ Download the zip file
 
 Extract the zip file contents 
 
-In a command prompt browse to the root of the folder run 
+#### In a command prompt browse to the root of the folder run 
 
 npm install
 
